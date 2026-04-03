@@ -1,13 +1,16 @@
 // 1 April 2026 | TankGame by Sidonie Kruger
 Tank t1;
-
+PImage bg1;
 void setup() {
   size(500, 500);
   t1=new Tank();
+  bg1= loadImage("Background.png");
 }
 
 void draw() {
-  background(127);
+  background(155);
+  imageMode (CORNER);
+  image (bg1,0,0);
   t1.display();
 }
 

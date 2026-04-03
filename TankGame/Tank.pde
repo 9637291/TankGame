@@ -3,6 +3,7 @@ class Tank {
   float x, y, w, h, speed, health;
   PImage iTank, iTankA, iTankS, iTankD;
   char idir;
+ 
 
   //Constructor
   Tank() {
@@ -10,7 +11,7 @@ class Tank {
     y = 100.0;
     w = 100.0;
     h = 100.0;
-    speed = 2.0;
+    speed = 4.0;
     health = 75.0;
     iTank = loadImage("tank.png");
     iTankA = loadImage("tankA.png");
@@ -28,12 +29,16 @@ class Tank {
 
   void move(char dir) {
     if (dir == 'w') {
+      idir = 'w';
       y = y - speed;
     } else if (dir == 's') {
+      idir = 's';
       y = y + speed;
     } else if (dir == 'a') {
+      idir = 'a';
       x = x - speed;
     } else if (dir == 'd') {
+      idir = 'd';
       x = x + speed;
     }
   }
