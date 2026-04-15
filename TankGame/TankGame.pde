@@ -1,9 +1,7 @@
 // 1 April 2026 | TankGame by Sidonie Kruger
 Tank t1;
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
-Obstacle o1;
-Obstacle2 o2;
-Obstacle3 o3;
+ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 PImage bg1;
 int score;
 
@@ -12,21 +10,37 @@ void setup() {
   score = 0;
   t1=new Tank();
   bg1= loadImage("Background.png");
-  o1 = new Obstacle(100, 100, 100, 50, 5, 100);
+  obstacles.add(new Obstacle(300, 200, 100, 100, int(random (1, 10)),10));
 }
 
 void draw() {
   background(155);
   imageMode (CORNER);
   image (bg1, 0, 0);
+   for (int i = 0; i < obstacles.size(); i++) {
+    Obstacle o = obstacles.get(i);
+   o.display();
+    o.move();
+  }
+    for (int i = 0; i < obstacles.size(); i++) {
+    Obstacle o = obstacles.get(i);
+   o.display();
+    o.move();
+  }
+    for (int i = 0; i < obstacles.size(); i++) {
+    Obstacle o = obstacles.get(i);
+   o.display();
+    o.move();
+  }
+    
   for (int i = 0; i < projectiles.size(); i++) {
     Projectile p = projectiles.get(i);
     p.display();
     p.move();
   }
   t1.display();
-  o1.display();
-  o1.move();
+ //o1.display();
+  //o1.move();
   scorePannel();
 }
 
