@@ -1,4 +1,4 @@
-class Obstacle {
+class Obstacle3 {
   // Member Variable
   float x, y, w, h, speed, health;
   PImage iTankbrown;
@@ -6,17 +6,18 @@ class Obstacle {
 
 
   //Constructor
-  Obstacle(float x, float y, float w, float h, float speed, float health) {
+  Obstacle3(float x, float y, float w, float h, float speed, float health) {
     this.x = x;
     this.y = y;
     this.w = w;
     this. h = h;
     this. speed = speed;
     this. health= health;
-    iTankbrown = loadImage("tankbrown.png");
+  
+    iTankbrown = loadImage("tankbrown3.png");
   }
 
-  void display() {
+ void display() {
     imageMode(CENTER);
     image(iTankbrown, x, y);
  
@@ -26,8 +27,5 @@ class Obstacle {
 
   void move() {
     x = x + speed;
-    if(x>width){
-      x = 0;
-    }
   }
 }

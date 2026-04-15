@@ -11,7 +11,7 @@ class Tank {
     y = 100.0;
     w = 100.0;
     h = 100.0;
-    speed = 4.0;
+    speed = 7.0;
     health = 75.0;
     iTank = loadImage("tank.png");
     iTankA = loadImage("tankA.png");
