@@ -11,21 +11,11 @@ class PowerUp {
     h = 100;
     speed = 5;
     if (int(random(4))==2) {
-      type = 'w';
-      x = random(width);
-      y = height + 100;
-    } else if (int(random(3))==1) {
-      type = 'd';
-      x = -100;
-      y = random(height);
-    } else if (int(random(2))==1) {
-      type = 'a';
-      x = width +100;
-      y = random(height);
-    } else {
-      type = 's';
-      x =random(width);
-      y = -100;
+   type = 'h'; // H is for health
+    }else if (int(random(3))==1){
+      type = 't'; // T is for Turret
+    }else{
+      type = 'a'; // A is for ammo
     }
     powerup = loadImage("powerup.png");
   }

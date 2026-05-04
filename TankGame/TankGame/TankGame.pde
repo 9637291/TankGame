@@ -27,7 +27,7 @@ void draw() {
   // Distribute object on timer
   if (objTimer.isFinished()) {
     //Add object
-    obstacles.add(new Obstacle(-100, 200, 100, 100, int(random (1, 10)), 10));
+    obstacles.add(new Obstacle( 100, 100, int(random (1, 10)), 10));
     //Restart Timer
     objTimer.start();
   }
@@ -39,82 +39,73 @@ void draw() {
     puTimer.start();
   }
 
+
   //Displays and removes powerups
-  for (int i = 0; i < powerups.size(); i++) {
-    PowerUp pu = powerups.get(i);
-    pu.display();
-    pu.move();
-    if (pu.offScreen()) {
-      powerups.remove(pu);
-    }
-    if (pu.intersect(t1)) {
-      //Turret
-      if (pu.type == 't') {
-        t1.turretCount++;
-      }
-    } else if (pu.type == 'a') {
-      t1.laserCount = laserCount + 100;
-    } else if (pu.type == 'h') {
-      t1.health++;
-    }
-  }
+  //for (int i = 0; i < powerups.size(); i++) {
+  //  PowerUp pu = powerups.get(i);
+  //  pu.display();
+  //  pu.move();
+  //  if (pu.offScreen()) {
+  //    powerups.remove(pu);
+  //  }
+  //  if (pu.intersect(t1)) {
+  //    //Turret
+  //    if (pu.type == 't') {
+  //      t1.turretCount++;
+  //    }
+  //  } else if (pu.type == 'a') {
+  //    t1.laserCount = t1.laserCount + 100;
+  //  } else if (pu.type == 'h') {
+  //    t1.health++;
+  //  }
+  //}
   //Detect collision to tank
   //if (t1.intersect(o)) {
-}
 
 
-//Displays and removes obstacles
-for (int i = 0; i < obstacles.size(); i++) {
-  Obstacle o = obstacles.get(i);
-  o.display();
-  o.move();
-  if (o.offScreen()) {
-    obstacles.remove(i);
+
+  //Displays and removes obstacles
+  for (int i = 0; i < obstacles.size(); i++) {
+    Obstacle o = obstacles.get(i);
+    o.display();
+    o.move();
+
+    //if (o.offScreen()) {
+    //  obstacles.remove(i);
+    //}
+    //Detect collision to tank
+    if (t1.intersect(o)) {
+      obstacles.remove(o);
+      score = score -1;
+    }
+    //impact to change score, health, and obstacle
   }
-  //Detect collision to tank
-  if (t1.intersect(o)) {
-  }
 
 
-
-  //impact to change score, health, and obstacle
-}
-for (int i = 0; i < obstacles.size(); i++) {
-  Obstacle o = obstacles.get(i);
-  o.display();
-  o.move();
-}
-for (int i = 0; i < obstacles.size(); i++) {
-  Obstacle o = obstacles.get(i);
-  o.display();
-  o.move();
-}
-// Render and detect collision
-for (int i = 0; i < projectiles.size(); i++) {
-  Projectile p = projectiles.get(i);
-  for (int j = 0; j < obstacles.size(); j++) {
-    Obstacle o = obstacles.get(j);
-    if (p.intersect(o)) {
-      score = score + 100;
+  // Render and detect collision
+  for (int i = 0; i < projectiles.size(); i++) {
+    Projectile p = projectiles.get(i);
+    for (int j = 0; j < obstacles.size(); j++) {
+      Obstacle o = obstacles.get(j);
+      if (p.intersect(o)) {
+        score = score + 100;
+        projectiles.remove(i);
+        obstacles.remove(j);
+        continue;
+      }
+    }
+    p.display();
+    p.move();
+    if (p.offScreen()) {
       projectiles.remove(i);
-      obstacles.remove(j);
-      continue;
     }
   }
-  p.display();
-  p.move();
-  if (p.offScreen()) {
-    projectiles.remove(i);
-  }
+  t1.display();
+  scorePannel();
+  println("Ojects in Memory:"+obstacles.size());
+  println("Ojects in Memory:"+projectiles.size());
 }
-t1.display();
-//o1.display();
-//o1.move();
-scorePannel();
-println("Ojects in Memory:"+obstacles.size());
-println("Ojects in Memory:"+projectiles.size());
-}
-}
+
 void keyPressed() {
   if (key == 'w') {
     t1.move('w');
@@ -137,19 +128,19 @@ void mousePressed() {
     dy /= mag;
 
     float speed = 5;
-    if (t1.turretCount == 1 && t1.lasaerCount > 0) {
+    if (t1.turretCount == 1 && t1.laserCount > 0) {
       projectiles.add(new Projectile(t1.x, t1.y, 4, 10));
-      t1.laserCount = t1.laerCount -1;
-    } else if (t1.turretCount == 2 && t1.lasaerCount > 2) {
+      t1.laserCount = t1.laserCount -1;
+    } else if (t1.turretCount == 2 && t1.laserCount > 2) {
       projectiles.add(new Projectile(t1.x-20, t1.y, 4, 10));
       projectiles.add(new Projectile(t1.y, t1.x+20, 4, 10));
-    }else if (t1.turretCount == 3) {
+    } else if (t1.turretCount == 3) {
       projectiles.add(new Projectile(t1.x-25, t1.y, 4, 10));
       projectiles.add(new Projectile(t1.y, t1.x+10, 4, 10));
       projectiles.add(new Projectile(t1.y, t1.x+100, 4, 10));
+    }
   }
 }
-
 
 void scorePannel() {
   fill(127, 100);
